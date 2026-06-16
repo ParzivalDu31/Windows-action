@@ -1,6 +1,8 @@
 name: Build EXE
 
-on: [push]
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,10 +16,11 @@ jobs:
       with:
         python-version: '3.11'
 
-  - name: Install deps
-  run: |
-    pip install --upgrade pip
-    pip install pyinstaller
+    - name: Install deps
+      run: |
+        pip install --upgrade pip
+        pip install pyinstaller
+
     - name: Build EXE
       run: pyinstaller --onefile main.py
 
@@ -26,6 +29,3 @@ jobs:
       with:
         name: exe
         path: dist/
-        on:
-  push:
-  workflow_dispatch:
